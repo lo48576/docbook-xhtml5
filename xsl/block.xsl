@@ -72,10 +72,10 @@
 <xsl:template match="d:screen">
 	<pre>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<code>
+		<samp>
 			<xsl:apply-templates select="." mode="ds:attr-specific-language-class" />
 			<xsl:apply-templates select="." mode="ds:inner" />
-		</code>
+		</samp>
 	</pre>
 </xsl:template>
 
