@@ -260,4 +260,10 @@
 
 <xsl:template match="*" mode="ds:default-attr-custom" />
 
+<xsl:template match="d:*" mode="ds:default-attr-custom">
+	<xsl:attribute name="data-docbook">
+		<xsl:value-of select="local-name()" />
+	</xsl:attribute>
+</xsl:template>
+
 </xsl:stylesheet>
