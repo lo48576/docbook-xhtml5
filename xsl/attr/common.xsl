@@ -16,11 +16,14 @@
 
 <xsl:template match="*" mode="ds:attr-common">
 	<xsl:param name="emit-id-attr" select="'yes'" />
+	<xsl:param name="additional-class" />
 
 	<xsl:call-template name="ds:attr-common">
 		<xsl:with-param name="emit-id-attr" select="$emit-id-attr" />
 	</xsl:call-template>
-	<xsl:apply-templates select="." mode="ds:attr-class" />
+	<xsl:apply-templates select="." mode="ds:attr-class">
+		<xsl:with-param name="additional-class" select="$additional-class" />
+	</xsl:apply-templates>
 	<xsl:apply-templates select="." mode="ds:attr-effectivity" />
 	<xsl:apply-templates select="." mode="ds:attr-rdfa-lite" />
 	<xsl:apply-templates select="." mode="ds:attr-specific" />
@@ -207,8 +210,11 @@
 </xsl:template>
 
 <xsl:template match="*" mode="ds:attr-class">
+	<xsl:param name="additional-class" />
 	<xsl:variable name="attr-value-raw">
 		<xsl:apply-templates select="." mode="ds:attr-class-value" />
+		<xsl:text> </xsl:text>
+		<xsl:value-of select="$additional-class" />
 	</xsl:variable>
 	<xsl:variable name="attr-value" select="normalize-space($attr-value-raw)" />
 	<xsl:if test="$attr-value != ''">
