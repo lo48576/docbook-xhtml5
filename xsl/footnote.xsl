@@ -21,6 +21,10 @@
 	<xsl:element name="a">
 		<xsl:apply-templates select="." mode="ds:attr-common">
 			<xsl:with-param name="emit-attr-id" select="'no'" />
+			<xsl:with-param name="additional-class">
+				<xsl:value-of select="$ds:attr-class-prefix" />
+				<xsl:text>footnote-refmark</xsl:text>
+			</xsl:with-param>
 		</xsl:apply-templates>
 		<xsl:if test="$refmark-id != ''">
 			<xsl:attribute name="id">
@@ -89,6 +93,10 @@
 	<ol start="0">
 		<xsl:apply-templates select="." mode="ds:attr-common">
 			<xsl:with-param name="emit-id-attr" select="'no'" />
+			<xsl:with-param name="additional-class">
+				<xsl:value-of select="$ds:attr-class-prefix" />
+				<xsl:text>footnote-list</xsl:text>
+			</xsl:with-param>
 		</xsl:apply-templates>
 		<xsl:apply-templates select=".//d:footnote" mode="ds:footnotes-item" />
 	</ol>
@@ -96,7 +104,12 @@
 
 <xsl:template match="d:footnote" mode="ds:footnotes-item">
 	<li>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:attr-common">
+			<xsl:with-param name="additional-class">
+				<xsl:value-of select="$ds:attr-class-prefix" />
+				<xsl:text>footnote-item</xsl:text>
+			</xsl:with-param>
+		</xsl:apply-templates>
 		<xsl:apply-templates select="." mode="ds:footnotes-item-inner" />
 	</li>
 </xsl:template>
