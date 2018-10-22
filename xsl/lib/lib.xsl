@@ -45,4 +45,23 @@
 			)" />
 </xsl:template>
 
+<xsl:template match="*" mode="ds:section-id">
+	<xsl:value-of select="(
+			ancestor-or-self::d:set |
+			ancestor-or-self::d:book |
+			ancestor-or-self::d:chapter |
+			ancestor-or-self::d:article |
+			ancestor-or-self::d:section |
+			ancestor-or-self::d:sect1 |
+			ancestor-or-self::d:sect2 |
+			ancestor-or-self::d:sect3 |
+			ancestor-or-self::d:sect4 |
+			ancestor-or-self::d:sect5 |
+			ancestor-or-self::d:caution |
+			ancestor-or-self::d:note |
+			ancestor-or-self::d:tip |
+			ancestor-or-self::d:warning
+		)[last()]/@xml:id" />
+</xsl:template>
+
 </xsl:stylesheet>
