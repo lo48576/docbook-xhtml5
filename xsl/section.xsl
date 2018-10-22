@@ -27,8 +27,11 @@
 
 <xsl:template match="d:title" mode="ds:section-heading">
 	<xsl:variable name="html-header-level">
-		<xsl:call-template name="ds:html-header-level" />
+		<xsl:apply-templates select="." mode="ds:html-header-level">
+			<xsl:with-param name="level-offset" select="-1" />
+		</xsl:apply-templates>
 	</xsl:variable>
+
 	<xsl:element name="h{$html-header-level}" namespace="{$ds:html-ns}">
 		<xsl:apply-templates select="." mode="ds:attr-common">
 			<xsl:with-param name="emit-id-attr" select="'no'" />

@@ -10,23 +10,39 @@
 >
 <xsl:output method="xml" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
-<!-- Returns HTML header level. -->
-<xsl:template name="ds:html-header-level">
+<!-- Returns HTML header level for the given section. -->
+<xsl:template match="*" mode="ds:html-header-level">
 	<xsl:param name="level-offset" select="0" />
 	<xsl:param name="section-level">
-		<xsl:call-template name="ds:section-level" />
+		<xsl:apply-templates select="." mode="ds:section-level" />
 	</xsl:param>
+	<!-- 1-based section level. -->
+	<xsl:variable name="section-level-one-based" select="number($section-level) + 1 + number($level-offset)" />
+
 	<xsl:choose>
-		<xsl:when test="(number($section-level) + number($level-offset)) &lt;= 6">
-			<xsl:value-of select="number($section-level) + number($level-offset)" />
+		<xsl:when test="$section-level-one-based &lt;= 6">
+			<xsl:value-of select="$section-level-one-based" />
 		</xsl:when>
 		<xsl:otherwise>6</xsl:otherwise>
 	</xsl:choose>
 </xsl:template>
 
+<xsl:template name="ds:html-header-level">
+	<xsl:param name="node" select="." />
+	<xsl:param name="level-offset" select="0" />
+	<xsl:param name="section-level">
+		<xsl:apply-templates select="$node" mode="ds:section-level" />
+	</xsl:param>
 
-<!-- Returns section level. -->
-<xsl:template name="ds:section-level">
+	<xsl:apply-templates select="$node" mode="ds:html-header-level">
+		<xsl:with-param name="level-offset" select="$level-offset" />
+		<xsl:with-param name="section-level" select="$section-level" />
+	</xsl:apply-templates>
+</xsl:template>
+
+<!-- Returns section level of the given section. -->
+<!-- Outermost section is level-0. -->
+<xsl:template match="*" mode="ds:section-level">
 	<xsl:value-of select="count(
 			ancestor::d:set |
 			ancestor::d:book |
@@ -43,6 +59,12 @@
 			ancestor::d:tip |
 			ancestor::d:warning
 			)" />
+</xsl:template>
+
+<xsl:template name="ds:section-level">
+	<xsl:param name="node" select="." />
+
+	<xsl:apply-templates select="$node" mode="ds:section-level" />
 </xsl:template>
 
 <xsl:template match="*" mode="ds:section-id">
