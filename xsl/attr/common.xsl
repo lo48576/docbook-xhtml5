@@ -15,7 +15,11 @@
 <xsl:output method="xml" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
 <xsl:template match="*" mode="ds:attr-common">
-	<xsl:call-template name="ds:attr-common" />
+	<xsl:param name="emit-id-attr" select="'yes'" />
+
+	<xsl:call-template name="ds:attr-common">
+		<xsl:with-param name="emit-id-attr" select="$emit-id-attr" />
+	</xsl:call-template>
 	<xsl:apply-templates select="." mode="ds:attr-class" />
 	<xsl:apply-templates select="." mode="ds:attr-effectivity" />
 	<xsl:apply-templates select="." mode="ds:attr-rdfa-lite" />
@@ -24,6 +28,8 @@
 </xsl:template>
 
 <xsl:template name="ds:attr-common">
+	<xsl:param name="emit-id-attr" select="'yes'" />
+
 	<xsl:apply-templates select="." mode="ds:attr-annotations" />
 	<xsl:apply-templates select="." mode="ds:attr-dir" />
 	<xsl:apply-templates select="." mode="ds:attr-remap" />
@@ -32,7 +38,9 @@
 	<xsl:apply-templates select="." mode="ds:attr-version" />
 	<xsl:apply-templates select="." mode="ds:attr-xreflabel" />
 	<xsl:apply-templates select="." mode="ds:attr-xml-base" />
-	<xsl:apply-templates select="." mode="ds:attr-xml-id" />
+	<xsl:if test="$emit-id-attr = 'yes'">
+		<xsl:apply-templates select="." mode="ds:attr-xml-id" />
+	</xsl:if>
 	<xsl:apply-templates select="." mode="ds:attr-xml-lang" />
 </xsl:template>
 

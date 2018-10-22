@@ -30,6 +30,10 @@
 		<xsl:call-template name="ds:html-header-level" />
 	</xsl:variable>
 	<xsl:element name="h{$html-header-level}" namespace="{$ds:html-ns}">
+		<xsl:apply-templates select="." mode="ds:attr-common">
+			<xsl:with-param name="emit-id-attr" select="'no'" />
+		</xsl:apply-templates>
+
 		<xsl:apply-templates select="." mode="ds:section-heading-inner" />
 	</xsl:element>
 </xsl:template>
