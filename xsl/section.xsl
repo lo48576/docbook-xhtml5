@@ -75,6 +75,25 @@
 <xsl:template match="d:article | d:section | d:sect1 | d:sect2 | d:sect3 | d:sect4 | d:sect5" mode="ds:inner">
 	<xsl:apply-templates select="." mode="ds:section-heading" />
 	<xsl:apply-templates />
+	<xsl:apply-templates select="." mode="ds:section-footer" />
+</xsl:template>
+
+<xsl:template match="*" mode="ds:section-footer" />
+
+<xsl:template match="d:article" mode="ds:section-footer">
+	<!-- section footer can have multiple subsections, so use `div` here. -->
+	<div>
+		<xsl:apply-templates select="." mode="ds:attr-common">
+			<xsl:with-param name="emit-id-attr" select="'no'" />
+		</xsl:apply-templates>
+		<xsl:apply-templates select="." mode="ds:section-footer-inner" />
+	</div>
+</xsl:template>
+
+<xsl:template match="d:article" mode="ds:section-footer-inner">
+	<xsl:if test=".//d:footnote">
+		<xsl:apply-templates select="." mode="ds:footnotes" />
+	</xsl:if>
 </xsl:template>
 
 <xsl:template match="d:caution | d:important | d:note | d:tip | d:warning">

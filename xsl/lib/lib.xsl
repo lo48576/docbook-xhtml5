@@ -8,6 +8,8 @@
 	xmlns:ds="https://www.cardina1.red/_ns/docbook/stylesheet"
 	exclude-result-prefixes="xsl d h ds"
 >
+<xsl:include href="footnote.xsl" />
+
 <xsl:output method="xml" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
 <!-- Returns HTML header level for the given section. -->

@@ -12,6 +12,7 @@
 >
 <xsl:include href="attr/common.xsl" />
 <xsl:include href="block.xsl" />
+<xsl:include href="footnote.xsl" />
 <xsl:include href="inline.xsl" />
 <xsl:include href="lib/lib.xsl" />
 <xsl:include href="link.xsl" />
