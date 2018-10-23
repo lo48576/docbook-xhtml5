@@ -229,9 +229,11 @@
 </xsl:template>
 
 <xsl:template name="ds:attr-class-value">
+	<xsl:text> </xsl:text>
 	<xsl:apply-templates select="." mode="ds:default-attr-class-value" />
 	<xsl:text> </xsl:text>
 	<xsl:apply-templates select="." mode="ds:default-attr-class-value-specific" />
+	<xsl:text> </xsl:text>
 </xsl:template>
 
 <xsl:template match="*" mode="ds:default-attr-class-value" />
