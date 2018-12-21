@@ -72,10 +72,6 @@
 
 <xsl:template match="*" mode="ds:footnotes">
 	<aside>
-		<xsl:apply-templates select="." mode="ds:attr-common">
-			<xsl:with-param name="emit-id-attr" select="'no'" />
-		</xsl:apply-templates>
-
 		<xsl:variable name="section-level">
 			<xsl:apply-templates select="." mode="ds:html-header-level">
 				<!-- offset 1 for `aside`. -->

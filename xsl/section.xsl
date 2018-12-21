@@ -83,9 +83,6 @@
 <xsl:template match="d:article" mode="ds:section-footer">
 	<!-- section footer can have multiple subsections, so use `div` here. -->
 	<div>
-		<xsl:apply-templates select="." mode="ds:attr-common">
-			<xsl:with-param name="emit-id-attr" select="'no'" />
-		</xsl:apply-templates>
 		<xsl:apply-templates select="." mode="ds:section-footer-inner" />
 	</div>
 </xsl:template>
