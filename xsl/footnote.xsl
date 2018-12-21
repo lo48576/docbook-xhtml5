@@ -72,6 +72,7 @@
 
 <xsl:template match="*" mode="ds:footnotes">
 	<aside>
+		<xsl:apply-templates select="." mode="ds:footnotes-attrs" />
 		<xsl:variable name="section-level">
 			<xsl:apply-templates select="." mode="ds:html-header-level">
 				<!-- offset 1 for `aside`. -->
@@ -79,7 +80,7 @@
 			</xsl:apply-templates>
 		</xsl:variable>
 		<xsl:element name="h{$section-level}">
-			<xsl:text>Footnotes</xsl:text>
+			<xsl:apply-templates select="." mode="ds:footnotes-title" />
 		</xsl:element>
 		<xsl:apply-templates select="." mode="ds:footnotes-inner" />
 	</aside>
@@ -96,6 +97,16 @@
 		</xsl:apply-templates>
 		<xsl:apply-templates select=".//d:footnote" mode="ds:footnotes-item" />
 	</ol>
+</xsl:template>
+
+<xsl:template match="*" mode="ds:footnotes-title">
+	<xsl:text>Footnotes</xsl:text>
+</xsl:template>
+
+<xsl:template match="*" mode="ds:footnotes-attrs">
+	<xsl:attribute name="class">
+		<xsl:text>footnotes</xsl:text>
+	</xsl:attribute>
 </xsl:template>
 
 <xsl:template match="d:footnote" mode="ds:footnotes-item">
