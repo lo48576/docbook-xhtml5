@@ -50,10 +50,10 @@
 <xsl:template match="d:*" mode="ds:title-inner">
 	<xsl:choose>
 		<xsl:when test="d:title">
-			<xsl:apply-templates select="d:title" mode="ds:section-heading-inner" />
+			<xsl:apply-templates select="d:title" mode="ds:inner" />
 		</xsl:when>
 		<xsl:when test="d:info/d:title">
-			<xsl:apply-templates select="d:info/d:title" mode="ds:section-heading-inner" />
+			<xsl:apply-templates select="d:info/d:title" mode="ds:inner" />
 		</xsl:when>
 	</xsl:choose>
 </xsl:template>
