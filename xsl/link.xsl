@@ -47,19 +47,7 @@
 
 <xsl:template match="*" mode="ds:default-link-resolve" />
 
-<xsl:template match="d:*" mode="ds:default-link-resolve">
-	<!-- TODO: Emit error if both `@xlink:href` and `@linkend` exist. -->
-	<xsl:choose>
-		<xsl:when test="@linkend">
-			<xsl:apply-templates select="@linkend" mode="ds:link-resolve" />
-		</xsl:when>
-		<xsl:when test="@xlink:href">
-			<xsl:apply-templates select="@xlink:href" mode="ds:link-resolve" />
-		</xsl:when>
-	</xsl:choose>
-</xsl:template>
-
-<xsl:template match="@linkend" mode="ds:default-link-resolve">
+<xsl:template match="d:*/@linkend" mode="ds:default-link-resolve">
 	<xsl:text>#</xsl:text>
 	<xsl:value-of select="." />
 </xsl:template>
@@ -73,10 +61,22 @@
 </xsl:template>
 
 <xsl:template name="ds:get-link-target">
-	<xsl:apply-templates select="." mode="ds:get-link-target" />
+	<xsl:apply-templates select="." mode="ds:default-get-link-target" />
 </xsl:template>
 
-<xsl:template match="*" mode="ds:get-link-target" />
+<xsl:template match="*" mode="ds:default-get-link-target" />
+
+<xsl:template match="d:*" mode="ds:default-get-link-target">
+	<!-- TODO: Emit error if both `@xlink:href` and `@linkend` exist. -->
+	<xsl:choose>
+		<xsl:when test="@linkend">
+			<xsl:apply-templates select="@linkend" mode="ds:link-resolve" />
+		</xsl:when>
+		<xsl:when test="@xlink:href">
+			<xsl:apply-templates select="@xlink:href" mode="ds:link-resolve" />
+		</xsl:when>
+	</xsl:choose>
+</xsl:template>
 
 <xsl:template match="* | @*" mode="ds:attrs-anchor-xlink" />
 
