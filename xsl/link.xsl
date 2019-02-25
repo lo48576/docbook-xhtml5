@@ -97,7 +97,7 @@
 
 <xsl:template match="d:xref">
 	<!-- TODO: Ensure it has `@linkend` attribute. -->
-	<!-- TODO: Ensure the linking elements are nested. -->
+	<!-- TODO: Ensure the linking elements are not nested. -->
 	<a>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
 		<xsl:attribute name="href">
@@ -135,7 +135,7 @@
 </xsl:template>
 
 <xsl:template match="d:link">
-	<!-- TODO: Ensure the linking elements are nested. -->
+	<!-- TODO: Ensure the linking elements are not nested. -->
 	<xsl:variable name="href">
 		<xsl:apply-templates select="." mode="ds:get-link-target" />
 	</xsl:variable>
