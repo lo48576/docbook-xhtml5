@@ -37,6 +37,7 @@
 	</xsl:choose>
 </xsl:template>
 
+<!-- `ds:link-resolve` is customization point to modify link URI. -->
 <xsl:template match="*" mode="ds:link-resolve">
 	<xsl:call-template name="ds:link-resolve" />
 </xsl:template>
@@ -47,7 +48,27 @@
 
 <xsl:template match="*" mode="ds:default-link-resolve" />
 
-<xsl:template match="d:*" mode="ds:default-link-resolve">
+<xsl:template match="d:*/@linkend" mode="ds:default-link-resolve">
+	<xsl:text>#</xsl:text>
+	<xsl:value-of select="." />
+</xsl:template>
+
+<xsl:template match="@xlink:href" mode="ds:default-link-resolve">
+	<xsl:value-of select="." />
+</xsl:template>
+
+<!-- `ds:get-link-target` finds a node containing URI, and pass that node to resolver. -->
+<xsl:template match="*" mode="ds:get-link-target">
+	<xsl:call-template name="ds:get-link-target" />
+</xsl:template>
+
+<xsl:template name="ds:get-link-target">
+	<xsl:apply-templates select="." mode="ds:default-get-link-target" />
+</xsl:template>
+
+<xsl:template match="*" mode="ds:default-get-link-target" />
+
+<xsl:template match="d:*" mode="ds:default-get-link-target">
 	<!-- TODO: Emit error if both `@xlink:href` and `@linkend` exist. -->
 	<xsl:choose>
 		<xsl:when test="@linkend">
@@ -58,25 +79,6 @@
 		</xsl:when>
 	</xsl:choose>
 </xsl:template>
-
-<xsl:template match="@linkend" mode="ds:default-link-resolve">
-	<xsl:text>#</xsl:text>
-	<xsl:value-of select="." />
-</xsl:template>
-
-<xsl:template match="@xlink:href" mode="ds:default-link-resolve">
-	<xsl:value-of select="." />
-</xsl:template>
-
-<xsl:template match="*" mode="ds:get-link-target">
-	<xsl:call-template name="ds:get-link-target" />
-</xsl:template>
-
-<xsl:template name="ds:get-link-target">
-	<xsl:apply-templates select="." mode="ds:get-link-target" />
-</xsl:template>
-
-<xsl:template match="*" mode="ds:get-link-target" />
 
 <xsl:template match="* | @*" mode="ds:attrs-anchor-xlink" />
 
@@ -97,7 +99,7 @@
 
 <xsl:template match="d:xref">
 	<!-- TODO: Ensure it has `@linkend` attribute. -->
-	<!-- TODO: Ensure the linking elements are nested. -->
+	<!-- TODO: Ensure the linking elements are not nested. -->
 	<a>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
 		<xsl:attribute name="href">
@@ -135,7 +137,7 @@
 </xsl:template>
 
 <xsl:template match="d:link">
-	<!-- TODO: Ensure the linking elements are nested. -->
+	<!-- TODO: Ensure the linking elements are not nested. -->
 	<xsl:variable name="href">
 		<xsl:apply-templates select="." mode="ds:get-link-target" />
 	</xsl:variable>
