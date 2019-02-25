@@ -37,6 +37,7 @@
 	</xsl:choose>
 </xsl:template>
 
+<!-- `ds:link-resolve` is customization point to modify link URI. -->
 <xsl:template match="*" mode="ds:link-resolve">
 	<xsl:call-template name="ds:link-resolve" />
 </xsl:template>
@@ -56,6 +57,7 @@
 	<xsl:value-of select="." />
 </xsl:template>
 
+<!-- `ds:get-link-target` finds a node containing URI, and pass that node to resolver. -->
 <xsl:template match="*" mode="ds:get-link-target">
 	<xsl:call-template name="ds:get-link-target" />
 </xsl:template>
