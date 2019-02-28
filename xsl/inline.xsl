@@ -83,7 +83,7 @@
 	</abbr>
 </xsl:template>
 
-<xsl:template match="d:classname | d:code | d:command | d:envar | d:filename | d:function | d:keycode | d:keysym | d:option | d:prompt | d:property | d:symbol | d:token | d:type">
+<xsl:template match="d:classname | d:code | d:command | d:envar | d:filename | d:function | d:keycode | d:keysym | d:option | d:prompt | d:property | d:symbol | d:tag | d:token | d:type">
 	<code>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
 		<xsl:apply-templates select="." mode="ds:inner" />
