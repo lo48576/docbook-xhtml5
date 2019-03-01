@@ -40,7 +40,7 @@
 	</div>
 </xsl:template>
 
-<xsl:template match="d:figure">
+<xsl:template match="d:example | d:figure | d:informalexample | d:informalfigure">
 	<figure>
 		<!-- FIXME: Support figure title. -->
 		<xsl:apply-templates select="." mode="ds:attr-common" />
@@ -48,7 +48,14 @@
 	</figure>
 </xsl:template>
 
-<xsl:template match="d:figure/d:caption">
+<xsl:template match="d:example/d:title | d:figure/d:title">
+	<div>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</div>
+</xsl:template>
+
+<xsl:template match="d:example/d:caption | d:figure/d:caption | d:informalexample/d:caption | d:informalfigure/d:caption">
 	<figcaption>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
 		<xsl:apply-templates select="." mode="ds:inner" />
