@@ -33,7 +33,7 @@
 	</div>
 </xsl:template>
 
-<xsl:template match="d:formalpara/d:title">
+<xsl:template match="d:formalpara/d:info/d:title | d:formalpara/d:title">
 	<div>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
 		<xsl:apply-templates select="." mode="ds:inner" />
@@ -48,7 +48,7 @@
 	</figure>
 </xsl:template>
 
-<xsl:template match="d:example/d:title | d:figure/d:title">
+<xsl:template match="d:example/d:info/d:title | d:example/d:title | d:figure/d:info/d:title | d:figure/d:title">
 	<div>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
 		<xsl:apply-templates select="." mode="ds:inner" />
