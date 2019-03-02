@@ -19,6 +19,7 @@
 <xsl:include href="media.xsl" />
 <xsl:include href="params.xsl" />
 <xsl:include href="section.xsl" />
+<xsl:include href="table.xsl" />
 
 <xsl:output method="xml" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
