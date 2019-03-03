@@ -227,7 +227,7 @@
 <xsl:template match="d:blockquote" mode="ds:inner">
 	<div>
 		<!-- TODO: Add some attribute to this `div`. -->
-		<xsl:apply-templates select="*[not(self::d:attribution)]" />
+		<xsl:apply-templates select="*[not(self::d:attribution)] | text()" />
 	</div>
 	<footer>
 		<!-- TODO: Add some attribute to this `div`. -->
