@@ -37,12 +37,71 @@
 <xsl:template match="d:table[d:tbody | d:tr]">
 	<table>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<!--
-			In HTML model, `caption` is always placed before `t{head,foot,body}`,
-			So there is no problem.
-		-->
 		<xsl:apply-templates select="." mode="ds:inner" />
 	</table>
+</xsl:template>
+
+<xsl:template match="d:table[d:tbody | d:tr]" mode="ds:inner">
+	<xsl:apply-templates select="d:caption" />
+	<xsl:apply-templates select="d:col | d:colgroup" />
+	<xsl:apply-templates select="d:thead" />
+	<xsl:apply-templates select="d:tbody | d:tr" />
+	<xsl:apply-templates select="d:tfoot" />
+</xsl:template>
+
+<xsl:template match="d:table[d:tbody | d:tr]/d:caption">
+	<caption>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</caption>
+</xsl:template>
+
+<xsl:template match="d:colgroup">
+	<colgroup>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</colgroup>
+</xsl:template>
+
+<xsl:template match="d:col">
+	<col>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</col>
+</xsl:template>
+
+<xsl:template match="d:tr">
+	<tr>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</tr>
+</xsl:template>
+
+<xsl:template match="d:td">
+	<td>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</td>
+</xsl:template>
+
+<xsl:template match="d:th">
+	<th>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</th>
+</xsl:template>
+
+<xsl:template match="d:td | d:th" mode="ds:default-attr-specific">
+	<xsl:if test="@colspan">
+		<xsl:attribute name="colspan">
+			<xsl:value-of select="@colspan" />
+		</xsl:attribute>
+	</xsl:if>
+	<xsl:if test="@rowspan">
+		<xsl:attribute name="rowspan">
+			<xsl:value-of select="@rowspan" />
+		</xsl:attribute>
+	</xsl:if>
 </xsl:template>
 
 <!-- CALS table with `mediaobject`s. -->
