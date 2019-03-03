@@ -130,10 +130,10 @@
 		If there is only single `d:tgroup`, put `h:caption` element to `h:table`
 		created from `d:tgroup`.
 	-->
-	<xsl:if test="count(d:tgroup) &gt; 1">
+	<xsl:if test="count(d:tgroup) &gt; 1 and d:caption">
 		<div>
-			<xsl:apply-templates select="../d:caption" mode="ds:attr-common" />
-			<xsl:apply-templates select="../d:caption" mode="ds:inner" />
+			<xsl:apply-templates select="d:caption" mode="ds:attr-common" />
+			<xsl:apply-templates select="d:caption" mode="ds:inner" />
 		</div>
 	</xsl:if>
 	<xsl:apply-templates select="*[not(self::d:caption)]" />
@@ -150,17 +150,21 @@
 <xsl:template match="d:tgroup">
 	<table>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:if test="count(../d:tgroup) = 1">
-			<caption>
-				<xsl:apply-templates select="../d:caption" mode="ds:attr-common" />
-				<xsl:apply-templates select="../d:caption" mode="ds:inner" />
-			</caption>
-		</xsl:if>
 		<xsl:apply-templates select="." mode="ds:inner" />
 	</table>
 </xsl:template>
 
 <xsl:template match="d:tgroup" mode="ds:inner">
+	<!--
+		If there are two or more `d:group`s, caption should be a child of
+		HTML elements for `d:table`, not for `d:tgroup`.
+	-->
+	<xsl:if test="count(../d:tgroup) = 1 and ../d:caption">
+		<caption>
+			<xsl:apply-templates select="../d:caption" mode="ds:attr-common" />
+			<xsl:apply-templates select="../d:caption" mode="ds:inner" />
+		</caption>
+	</xsl:if>
 	<xsl:if test="d:colspec">
 		<colgroup>
 			<xsl:apply-templates select="d:colspec" />
