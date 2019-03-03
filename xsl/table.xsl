@@ -12,6 +12,27 @@
 >
 <xsl:output method="xml" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
+<xsl:template match="d:tbody">
+	<tbody>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</tbody>
+</xsl:template>
+
+<xsl:template match="d:tfoot">
+	<tfoot>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</tfoot>
+</xsl:template>
+
+<xsl:template match="d:thead">
+	<thead>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</thead>
+</xsl:template>
+
 <!-- HTML table. -->
 <xsl:template match="d:table[d:tbody | d:tr]">
 	<table>
@@ -93,27 +114,6 @@
 	<xsl:apply-templates select="d:thead" />
 	<xsl:apply-templates select="d:tbody" />
 	<xsl:apply-templates select="d:tfoot" />
-</xsl:template>
-
-<xsl:template match="d:tbody">
-	<tbody>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</tbody>
-</xsl:template>
-
-<xsl:template match="d:tfoot">
-	<tfoot>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</tfoot>
-</xsl:template>
-
-<xsl:template match="d:thead">
-	<thead>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</thead>
 </xsl:template>
 
 <xsl:template match="d:row">
