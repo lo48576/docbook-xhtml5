@@ -125,12 +125,49 @@
 
 <xsl:template match="d:entry">
 	<!-- TODO: Support header with `@rowheader='headers'`. -->
+	<xsl:variable name="is-first-col" select="position()=1" />
+	<xsl:variable name="bfh-result">
+		<!-- Check `colspec/@rowheader` in `tbody`, `tfoot`, `thead`. -->
+		<xsl:variable name="t-bfh-colspecs" select="ancestor::d:*[self::d:tbody | self::d:tfoot | self::d:thead][1]/d:colspec" />
+		<xsl:choose>
+			<xsl:when test="$is-first-col and $t-bfh-colspecs[@colnum = 1][@rowheader = 'firstcol']">yes</xsl:when>
+			<xsl:when test="$is-first-col and $t-bfh-colspecs[1][not(@colnum)][@rowheader = 'firstcol']">yes</xsl:when>
+			<xsl:otherwise>unspecified</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="tgroup-result">
+		<!-- Check `colspec/@rowheader` in `tgroup`. -->
+		<xsl:variable name="tgroup-colspecs" select="ancestor::d:tgroup[1]/d:colspec" />
+		<xsl:choose>
+			<xsl:when test="$is-first-col and $tgroup-colspecs[@colnum = 1][@rowheader = 'firstcol']">yes</xsl:when>
+			<xsl:when test="$is-first-col and $tgroup-colspecs[1][not(@colnum)][@rowheader = 'firstcol']">yes</xsl:when>
+			<xsl:otherwise>unspecified</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="table-result">
+		<!-- Check `colspec/@rowheader` in `table`. -->
+		<xsl:choose>
+			<xsl:when test="$is-first-col and ancestor::d:table[1][@rowheader = 'firstcol']">yes</xsl:when>
+			<xsl:otherwise>unspecified</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+	<xsl:variable name="is-header">
+		<xsl:choose>
+			<xsl:when test="$bfh-result != 'unspecified'">
+				<xsl:value-of select="$bfh-result" />
+			</xsl:when>
+			<xsl:when test="$tgroup-result != 'unspecified'">
+				<xsl:value-of select="$tgroup-result" />
+			</xsl:when>
+			<xsl:when test="$table-result != 'unspecified'">
+				<xsl:value-of select="$table-result" />
+			</xsl:when>
+			<xsl:otherwise>no</xsl:otherwise>
+		</xsl:choose>
+	</xsl:variable>
+
 	<xsl:choose>
-		<!-- First column with `@rowheader='firstcol'`. -->
-		<xsl:when test="
-			(position() = 1) and
-			(ancestor::d:table[1] | ancestor::d:tgroup[1]/d:colspec[@colnum=1] | ancestor::d:tgroup[1]/d:colspec[1][not(@colnum)])[@rowheader='firstcol']
-			">
+		<xsl:when test="$is-header = 'yes'">
 			<th>
 				<xsl:apply-templates select="." mode="ds:attr-common" />
 				<xsl:apply-templates select="." mode="ds:inner" />
