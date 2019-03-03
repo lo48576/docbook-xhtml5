@@ -36,7 +36,7 @@
 	</thead>
 </xsl:template>
 
-<xsl:template match="d:table | d:informaltable" mode="ds:attr-table-common">
+<xsl:template match="d:table | d:informaltable | d:entrytbl" mode="ds:attr-table-common">
 	<xsl:if test="@orient">
 		<xsl:attribute name="docbook-table-orient">
 			<xsl:value-of select="@orient" />

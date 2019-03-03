@@ -165,6 +165,19 @@
 	</xsl:choose>
 </xsl:template>
 
+<xsl:template match="d:entrytbl">
+	<td>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:attr-table-entry" />
+		<table>
+			<xsl:apply-templates select="." mode="ds:attr-common">
+				<xsl:with-param name="emit-id-attr" select="'no'" />
+			</xsl:apply-templates>
+			<xsl:apply-templates select="." mode="ds:inner" />
+		</table>
+	</td>
+</xsl:template>
+
 <xsl:template match="d:entry" mode="ds:attr-table-entry">
 	<xsl:if test="@morerows">
 		<xsl:attribute name="rowspan">
