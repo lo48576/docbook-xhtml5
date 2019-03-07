@@ -177,6 +177,7 @@
 	</dd>
 </xsl:template>
 
+<!-- FIXME: Deal with `title`. -->
 <xsl:template match="d:blockquote">
 	<blockquote>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
