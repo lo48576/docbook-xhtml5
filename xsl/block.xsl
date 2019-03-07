@@ -12,6 +12,8 @@
 >
 <xsl:output method="xml" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
+<xsl:include href="block/qanda.xsl" />
+
 <xsl:template match="d:simpara">
 	<p>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
@@ -173,48 +175,6 @@
 		<xsl:apply-templates select="." mode="ds:attr-common" />
 		<xsl:apply-templates select="." mode="ds:inner" />
 	</dd>
-</xsl:template>
-
-<xsl:template match="d:qandaset">
-	<!-- FIXME: Process `@defaultlabel` correctly. -->
-	<div>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</div>
-</xsl:template>
-
-<xsl:template match="d:qandadiv">
-	<!-- TODO: Treat `title` correctly. -->
-	<div>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</div>
-</xsl:template>
-
-<xsl:template match="d:qandadiv | d:qandaset" mode="ds:inner">
-	<xsl:apply-templates select="*[not(self::d:qandadiv | self::d:qandaentry)]" />
-	<xsl:apply-templates select="d:qandadiv" />
-	<xsl:if test="d:qandaentry">
-		<div>
-			<!-- TODO: Add some attribute to this `div`. -->
-			<xsl:apply-templates select="d:qandaentry" />
-		</div>
-	</xsl:if>
-</xsl:template>
-
-<xsl:template match="d:qandaentry">
-	<!-- TODO: Treat `title` correctly. -->
-	<div>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</div>
-</xsl:template>
-
-<xsl:template match="d:question | d:answer">
-	<div>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</div>
 </xsl:template>
 
 <xsl:template match="d:blockquote">
