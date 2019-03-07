@@ -190,17 +190,14 @@
 		<!-- TODO: Add some attribute to this `div`. -->
 		<xsl:apply-templates select="*[not(self::d:attribution)] | text()" />
 	</div>
-	<footer>
-		<!-- TODO: Add some attribute to this `div`. -->
-		<xsl:apply-templates select="d:attribution" />
-	</footer>
+	<xsl:apply-templates select="d:attribution" />
 </xsl:template>
 
 <xsl:template match="d:attribution">
-	<div>
+	<footer>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
 		<xsl:apply-templates select="." mode="ds:inner" />
-	</div>
+	</footer>
 </xsl:template>
 
 </xsl:stylesheet>
