@@ -38,7 +38,7 @@
 </xsl:template>
 
 <!-- `ds:link-resolve` is customization point to modify link URI. -->
-<xsl:template match="*" mode="ds:link-resolve">
+<xsl:template match="* | @*" mode="ds:link-resolve">
 	<xsl:call-template name="ds:link-resolve" />
 </xsl:template>
 
@@ -46,7 +46,7 @@
 	<xsl:apply-templates select="." mode="ds:default-link-resolve" />
 </xsl:template>
 
-<xsl:template match="*" mode="ds:default-link-resolve" />
+<xsl:template match="* | @*" mode="ds:default-link-resolve" />
 
 <xsl:template match="d:*/@linkend" mode="ds:default-link-resolve">
 	<xsl:text>#</xsl:text>
