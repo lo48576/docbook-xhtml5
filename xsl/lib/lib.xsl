@@ -9,6 +9,7 @@
 	exclude-result-prefixes="xsl d h ds"
 >
 <xsl:include href="footnote.xsl" />
+<xsl:include href="link.xsl" />
 
 <xsl:output method="xml" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
