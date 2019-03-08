@@ -83,11 +83,38 @@
 	</abbr>
 </xsl:template>
 
-<xsl:template match="d:classname | d:code | d:command | d:envar | d:filename | d:function | d:keycode | d:keysym | d:option | d:prompt | d:property | d:symbol | d:tag | d:token | d:type">
+<xsl:template match="
+	d:arg |
+	d:classname |
+	d:code |
+	d:command |
+	d:envar |
+	d:filename |
+	d:function |
+	d:keycode |
+	d:keysym |
+	d:markup |
+	d:ooclass |
+	d:option |
+	d:prompt |
+	d:property |
+	d:symbol |
+	d:tag |
+	d:token |
+	d:type |
+	d:varname
+	">
 	<code>
 		<xsl:apply-templates select="." mode="ds:attr-common" />
 		<xsl:apply-templates select="." mode="ds:inner" />
 	</code>
+</xsl:template>
+
+<xsl:template match="d:application | d:package">
+	<span>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</span>
 </xsl:template>
 
 <xsl:template match="d:filename" mode="ds:default-attr-specific">
@@ -164,6 +191,27 @@
 		<xsl:apply-templates select="." mode="ds:attr-common" />
 		<xsl:apply-templates select="." mode="ds:inner" />
 	</time>
+</xsl:template>
+
+<xsl:template match="d:quote">
+	<q>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</q>
+</xsl:template>
+
+<xsl:template match="d:subscript">
+	<sub>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</sub>
+</xsl:template>
+
+<xsl:template match="d:superscript">
+	<sup>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</sup>
 </xsl:template>
 
 </xsl:stylesheet>
