@@ -11,17 +11,25 @@
 <xsl:output method="xml" encoding="utf-8" indent="yes" omit-xml-declaration="yes" />
 
 <xsl:template match="d:wordasword">
-	<em>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</em>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<em>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</em>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:firstterm | d:foreignphrase | d:phrase | d:replaceable | d:uri">
-	<span>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</span>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<span>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</span>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:replaceable" mode="ds:default-attr-specific">
@@ -41,24 +49,36 @@
 </xsl:template>
 
 <xsl:template match="d:address | d:city | d:country | d:email | d:fax | d:otheraddr | d:phone | d:pob | d:postcode | d:state | d:street">
-	<span>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</span>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<span>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</span>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:affiliation | d:firstname | d:honorific | d:jobtitle | d:lineage | d:orgdiv | d:orgname | d:othername | d:shortaffil | d:surname">
-	<span>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</span>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<span>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</span>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:author | d:authorgroup | d:collab | d:contrib | d:editor | d:othercredit | d:personblurb | d:personname">
-	<span>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</span>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<span>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</span>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:othercredit" mode="ds:default-attr-specific">
@@ -70,17 +90,25 @@
 </xsl:template>
 
 <xsl:template match="d:emphasis">
-	<strong>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</strong>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<strong>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</strong>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:abbrev | d:acronym">
-	<abbr>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</abbr>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<abbr>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</abbr>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="
@@ -104,17 +132,25 @@
 	d:type |
 	d:varname
 	">
-	<code>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</code>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<code>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</code>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:application | d:package">
-	<span>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</span>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<span>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</span>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:filename" mode="ds:default-attr-specific">
@@ -134,10 +170,14 @@
 </xsl:template>
 
 <xsl:template match="d:keycap | d:keycombo | d:userinput">
-	<kbd>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</kbd>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<kbd>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</kbd>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:keycap" mode="ds:default-attr-specific">
@@ -187,31 +227,47 @@
 </xsl:template>
 
 <xsl:template match="d:date">
-	<time>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</time>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<time>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</time>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:quote">
-	<q>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</q>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<q>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</q>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:subscript">
-	<sub>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</sub>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<sub>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</sub>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 <xsl:template match="d:superscript">
-	<sup>
-		<xsl:apply-templates select="." mode="ds:attr-common" />
-		<xsl:apply-templates select="." mode="ds:inner" />
-	</sup>
+	<xsl:apply-templates select="." mode="ds:link-attrs-wrapper">
+		<xsl:with-param name="body">
+			<sup>
+				<xsl:apply-templates select="." mode="ds:attr-common" />
+				<xsl:apply-templates select="." mode="ds:inner" />
+			</sup>
+		</xsl:with-param>
+	</xsl:apply-templates>
 </xsl:template>
 
 </xsl:stylesheet>
