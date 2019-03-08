@@ -192,4 +192,25 @@
 	</time>
 </xsl:template>
 
+<xsl:template match="d:quote">
+	<q>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</q>
+</xsl:template>
+
+<xsl:template match="d:subscript">
+	<sub>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</sub>
+</xsl:template>
+
+<xsl:template match="d:superscript">
+	<sup>
+		<xsl:apply-templates select="." mode="ds:attr-common" />
+		<xsl:apply-templates select="." mode="ds:inner" />
+	</sup>
+</xsl:template>
+
 </xsl:stylesheet>
