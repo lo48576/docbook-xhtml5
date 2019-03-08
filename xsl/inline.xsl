@@ -93,6 +93,7 @@
 	d:function |
 	d:keycode |
 	d:keysym |
+	d:markup |
 	d:ooclass |
 	d:option |
 	d:prompt |
